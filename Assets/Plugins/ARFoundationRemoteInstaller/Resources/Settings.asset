@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd607c3f010ab45a29ecfcf8d5a898ef, type: 3}
   m_Name: Settings
   m_EditorClassIdentifier: 
-  ARCompanionAppIP: 169.254.181.229
+  ARCompanionAppIP: 192.168.0.
   arCompanionSettings:
     cameraVideoSettings:
       enableVideo: 1
@@ -37,66 +37,12 @@ MonoBehaviour:
   editorGameViewSettings:
     resolutionScale: 0.33333334
     maxEditorViewFps: 10
-  packages:
-  - displayName: AR Foundation Remote
-    version: 1.4.30-release.2
-    id: com.kyrylokuzyk.arfoundationremote
-  - displayName: AR Foundation
-    version: 5.0.6
-    id: com.unity.xr.arfoundation
-  - displayName: Apple ARKit XR Plugin
-    version: 5.0.6
-    id: com.unity.xr.arkit
-  - displayName: Input System
-    version: 1.4.4
-    id: com.unity.inputsystem
-  - displayName: AR Subsystems
-    version: 5.0.2
-    id: com.unity.xr.arsubsystems
-  inputHandlingData:
-    isLegacyInputManagerEnabled: 1
-    isNewInputSystemEnabled: 1
   debugSettings:
     logStartupErrors: 1
     showTelepathyLogs: 0
     showTelepathyWarningsAndErrors: 1
     printCompanionAppIPsToConsole: 0
-    overrideDisplayMatrix: 0
-    displayMatrix:
-      e00: 0
-      e01: -0.6161137
-      e02: 0
-      e03: 0
-      e10: -1
-      e11: -0
-      e12: 0
-      e13: 0
-      e20: 1
-      e21: 0.8080569
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    overrideProjectionMatrix: 0
-    projectionMatrix:
-      e00: 3.2966828
-      e01: 0
-      e02: -0.024370432
-      e03: 0
-      e10: 0
-      e11: 1.5233487
-      e12: -0.034572482
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: -1.0002
-      e23: -0.20002
-      e30: 0
-      e31: 0
-      e32: -1
-      e33: 0
+    warnIfReceiverConnectionWasDestroyed: 0
     checkPackageVersions: 1
     enablePluginInAllBuildTargets: 0
     warnNonEmbeddedImageLibrary: 1

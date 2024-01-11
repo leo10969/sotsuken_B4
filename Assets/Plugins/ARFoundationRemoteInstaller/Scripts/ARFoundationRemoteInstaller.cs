@@ -60,54 +60,6 @@ namespace ARFoundationRemote.Editor {
 
         }
 
-        static void checkDependencies(Action<bool> callback) {
-            var listRequest = Client.List(true, true);
-            runRequest(listRequest, () => {
-                callback(checkVersions(listRequest.Result));
-            });
-        }
-
-        static bool checkVersions(PackageCollection packages) {
-            var result = true;
-            foreach (var package in packages) {
-                var packageName = package.name;
-                var currentVersion = parseUnityPackageManagerVersion(package.version);
-                if (minDependencies.TryGetValue(packageName, out string dependency)) {
-                    var minRequiredVersion = new Version(dependency);
-                    if (currentVersion < minRequiredVersion) {
-                        result = false;
-                        Debug.LogError("Please update this package to the required version via Window -> Package Manager: " + packageName + ":" + minRequiredVersion);
-                    }
-                }
-            }
-
-            if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.iOS) {
-                if (packages.All(_ => _.name != "com.unity.xr.arkit-face-tracking")) {
-                    Debug.Log("To enable iOS face tracking, install ARKit Face Tracking 3.0.1 via Package Manager.");
-                }
-            }
-            
-            return result;
-        }
-
-        /// <see cref="ARFoundationRemote.Runtime.PackageVersionData.parseUnityPackageManagerVersion"/>
-        static Version parseUnityPackageManagerVersion(string version) {
-            var versionNumbersStrings = version.Split('.', '-');
-            const int numOfVersionComponents = 3;
-            Assert.IsTrue(versionNumbersStrings.Length >= numOfVersionComponents);
-            var numbers = new List<int>();
-            for (int i = 0; i < numOfVersionComponents; i++) {
-                var str = versionNumbersStrings[i];
-                if (int.TryParse(str, out int num)) {
-                    numbers.Add(num);
-                } else {
-                    throw new Exception("cant parse " + str + " in " + version);
-                }
-            }
-
-            return new Version(numbers[0], numbers[1], numbers[2]);
-        }
-
         static Action requestCompletedCallback;
         static Request currentRequest;
 
@@ -143,26 +95,20 @@ namespace ARFoundationRemote.Editor {
 
         internal static void installPlugin_internal() {
             log("installPlugin_internal");
-            checkDependencies(success => {
-                if (success) {
-                    if (UNITY_2019_2) {
-                        Debug.LogError($"{displayName}: please add this line to Packages/manifest.json in dependencies section:\n" +
-                                       $"\"com.kyrylokuzyk.arfoundationremote\": \"file:../Assets/Plugins/ARFoundationRemoteInstaller/{pluginId}.tgz\",\n");
-                        return;
-                    }
+            if (UNITY_2019_2) {
+                Debug.LogError($"{displayName}: please add this line to Packages/manifest.json in dependencies section:\n" +
+                               $"\"com.kyrylokuzyk.arfoundationremote\": \"file:../Assets/Plugins/ARFoundationRemoteInstaller/{pluginId}.tgz\",\n");
+                return;
+            }
                     
-                    var path = $"file:../Assets/Plugins/ARFoundationRemoteInstaller/{pluginId}.tgz";
-                    var addRequest = Client.Add(path);
-                    runRequest(addRequest, () => {
-                        if (addRequest.Status == StatusCode.Success) {
-                            Debug.Log(displayName + " installed successfully. Please read Documentation.md located at Assets/Plugins/ARFoundationRemoteInstaller/Documentation.md");
-                            InstallerSettings.AddGitIgnore = true;
-                        } else {
-                            Debug.LogError($"{displayName}: installation failed, error message: {addRequest.Error?.message}, error code: {addRequest.Error?.errorCode}");
-                        }
-                    });
+            var path = $"file:../Assets/Plugins/ARFoundationRemoteInstaller/{pluginId}.tgz";
+            var addRequest = Client.Add(path);
+            runRequest(addRequest, () => {
+                if (addRequest.Status == StatusCode.Success) {
+                    Debug.Log(displayName + " installed successfully. Please read Documentation.md located at Assets/Plugins/ARFoundationRemoteInstaller/Documentation.md");
+                    InstallerSettings.AddGitIgnore = true;
                 } else {
-                    Debug.LogError(displayName + " installation failed. Please fix errors and press 'Installer-Install Plugin'");
+                    Debug.LogError($"{displayName}: installation failed, error message: {addRequest.Error?.message}, error code: {addRequest.Error?.errorCode}");
                 }
             });
         }

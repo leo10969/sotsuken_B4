@@ -1372,7 +1372,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &692045449
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1747,7 +1747,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &905675282
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2427,7 +2427,8 @@ MonoBehaviour:
   touchManager: {fileID: 276509023}
   exampleField: {fileID: 1339225984}
   inputField: {fileID: 437413492}
-  TypingDurations: []
+  TimeStamps: []
+  PhraseTimes: []
   PhraseTexts: []
   PhraseLength: 
   InputTexts: []
@@ -2602,7 +2603,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1344008908
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2733,7 +2734,7 @@ MonoBehaviour:
   currentHeaderType: 2
   currentFilterType: 2
   beta: 5
-  fcmin: 0.00001
+  fcmin: 0.1
 --- !u!114 &1355274058
 MonoBehaviour:
   m_ObjectHideFlags: 0

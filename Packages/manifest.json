@@ -19,6 +19,7 @@
     "jp.keijiro.klak.testtools": "1.0.4",
     "jp.keijiro.mediapipe.blazepalm": "2.1.1",
     "jp.keijiro.mediapipe.handlandmark": "2.1.1",
-    "jp.keijiro.test-assets": "1.0.1"
+    "jp.keijiro.test-assets": "1.0.1",
+    "com.unity.collab-proxy": "2.1.0"
   }
 }

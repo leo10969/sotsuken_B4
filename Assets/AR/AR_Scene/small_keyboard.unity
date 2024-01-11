@@ -2527,7 +2527,7 @@ MonoBehaviour:
   currentHeaderType: 2
   currentFilterType: 2
   beta: 5
-  fcmin: 0.00001
+  fcmin: 0.1
 --- !u!114 &1355274058
 MonoBehaviour:
   m_ObjectHideFlags: 0
