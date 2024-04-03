@@ -1,7 +1,8 @@
-以下のプロジェクトを基に作成しました．
-このプロジェクトを使用する際の注意点
-##ARFoundationRemoteを使う際は，きちんとARFoundationRemoteプラグインがインポートされているかを確認すること．
+- 以下のプロジェクトを基に作成しました．
+- このプロジェクトを使用する際の注意点
+  - ##ARFoundationRemoteを使う際は，きちんとARFoundationRemoteプラグインがインポートされているかを確認すること．
 →Assets Storeからダウンロードする，または，他のローカルプロジェクトから引っ張ってくること．
+
 ---
 
 HandPoseBarracuda
