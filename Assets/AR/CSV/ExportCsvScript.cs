@@ -88,15 +88,31 @@ namespace MediaPipe.HandPose
                             break;
                     }
                 }
-
+                string baseFileName;
                 // Debugモード用のファイル名を生成
-                string baseFileName = string.IsNullOrEmpty(lastpath) ? "/Debug" : "/Debug_" + lastpath;
+                if (string.IsNullOrEmpty(lastpath))
+                { 
+                    baseFileName = "/Debug_" + System.DateTime.Now.ToString("yyyyMMddHHmmss");
+                }
+                else 
+                {
+                    baseFileName = "/Debug_" + lastpath;
+                }
                 return UnityEngine.Application.persistentDataPath + baseFileName + filterSuffix + ".csv";
             }
             else if (currentMode == Mode.Experiment)
             {
+                string baseFileName;
                 // Experimentモード用のファイル名を生成
-                return UnityEngine.Application.persistentDataPath + "/Study_" + lastpath + ".csv";
+                if (string.IsNullOrEmpty(lastpath))
+                {
+                    baseFileName = "/Study_" + System.DateTime.Now.ToString("yyyyMMddHHmmss");
+                }
+                else
+                {
+                    baseFileName = "/Study_" + lastpath;
+                }
+                return UnityEngine.Application.persistentDataPath + baseFileName + ".csv";
             }
 
             // 他のモードの場合には空の文字列を返すか、別途処理を追加
@@ -139,7 +155,7 @@ namespace MediaPipe.HandPose
 
         private string[] GeneratePhraseHeaders()
         {
-            List<string> headers = new List<string> { "test_id", "input mode", "practice", "test_date" };
+            List<string> headers = new List<string> { "test_id", "input mode", "practice", "keyb_size", "test_date" };
             // Debug.Log("numPhrases:" + numPhrases);
             for (int i = 1; i <= numPhrases; i++)
             {

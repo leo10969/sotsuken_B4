@@ -171,13 +171,13 @@ namespace MediaPipe.HandPose
                     thumbSecondJointSphere = go;
                     fingerTips.Add(thumbSecondJointSphere);
                 }
-                if (i == 4)
+                else if (i == 4)
                 {
                     thumbTipSphere = go;
                     fingerTips.Add(thumbTipSphere);
                 }
                 //中指の第4関節
-                if (i == 9)
+                else if (i == 9)
                 {
                     
                     middleForthJointSphere = go;
@@ -185,34 +185,41 @@ namespace MediaPipe.HandPose
 
                 }
                 //中指の先端
-                if (i == 12)
+                else if (i == 12)
                 {
                     
                     middleTipSphere = go;
                     fingerTips.Add(middleTipSphere);
                 }
                 //薬指の第4関節
-                if (i == 17)
+                else if (i == 17)
                 {
                     littleForthJointSphere = go;
                     fingerTips.Add(littleForthJointSphere);
                 }
                 //薬指の先端
-                if (i ==20)
+                else if (i ==20)
                 {
                     littleTipSphere = go;
                     fingerTips.Add(littleTipSphere);
 
                 }
                 //人差し指 if keyPoint corresponds to the tip of the index finger, add a specific tag to the GameObject
-                if (i == 8)
+                else if (i == 8)
                 {
                     
                     go.tag = "IndexRay";
                     indexTipSphere = go;
                     fingerTips.Add(indexTipSphere);
                 }
+                else
+                {
+                    go.SetActive(false);
+                }
+                
             }
+            // このオブジェクトをシーンから遠ざける（例：ワールド座標の原点から非常に遠い位置へ移動）
+            _jointPrefab.transform.position = new Vector3(10000, 10000, 10000);
         }
 
         /// <summary>

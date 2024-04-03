@@ -11,11 +11,11 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/AR/AR_Scene/MainScene.unity
     guid: 709bb8be516c44e57a738b529b8a0d7c
-  - enabled: 1
+  - enabled: 0
     path: Assets/AR/AR_Scene/small_keyboard.unity
     guid: f2a22cffec7b145a2ae253c30e65dc1a
-  - enabled: 0
-    path: Assets/AR/AR_Scene/big_keyboard.unity
+  - enabled: 1
+    path: Assets/AR/AR_Scene/ThumbScreen_app.unity
     guid: 4151b2346e97542abba111dee38c0594
   m_configObjects:
     AR Foundation RemoteARFoundationRemoteLoaderSettings: {fileID: 11400000, guid: c3b4a24214ec54ccfad13425d3dbea8d, type: 2}

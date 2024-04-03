@@ -11,6 +11,7 @@ namespace MediaPipe.HandPose
         public TypingScript typingScript;
         public HandAnimator handAnimator;
         public TouchManager touchManager;
+        public ChangeKeyboard changeKeyboard;
         public string InputMode { get; set; }
         public TextMeshProUGUI exampleField; // ExampleTextUIへの参照
         public TMP_InputField inputField; // InputTextUIへの参照
@@ -100,7 +101,8 @@ namespace MediaPipe.HandPose
             dataToSave.Add(TestId);
             dataToSave.Add(InputMode);
             dataToSave.Add(isPractice.ToString());
-            dataToSave.Add(System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            dataToSave.Add(changeKeyboard.KeyboardSize);
+            dataToSave.Add(System.DateTime.Now.ToString("yyyyMMddHHmmss"));
 
             int totalDeleteCount = 0;
             int totalPhraseLength  = 0;

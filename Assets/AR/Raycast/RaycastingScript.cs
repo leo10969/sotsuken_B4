@@ -53,7 +53,6 @@ namespace MediaPipe.HandPose
                 {
                     if (i == 0) // 最初に衝突したオブジェクト = キー
                     {
-
                         // 衝突しているキーのKeyControllerを取得
                         KeyController keyController = hits[i].collider.gameObject.GetComponent<KeyController>();
                         if(keyController != null)
@@ -62,16 +61,24 @@ namespace MediaPipe.HandPose
                         }
                         if(lastHitKey)
                         {
-                            KeyController lastKeyController = lastHitKey.GetComponent<KeyController>();
-                            if(lastHitKey != hits[i].collider.gameObject && lastKeyController)
+                            // すでに指が何かのキーの上にある状態
+                            KeyController lastKeyController = lastHitKey.GetComponent<KeyController>();   
+                            //すでに押されたキーと現在のレイが当たっているキーが異なるとき（＝異なるキーに動いた時）
+                            if((lastHitKey != hits[i].collider.gameObject || hits[i].collider.gameObject == null)&& lastKeyController)
                             {
+                                //前回のキーの色を元に戻す
                                 lastKeyController.keyTextMesh.color = Color.red;
+                                handAnimator.hasInputTriggered = false;
                             }
+                            //すでに押されたキーと現在のレイが当たっているキーが同じとき（＝同じキーから動いていない時）
                             else if(lastHitKey == hits[i].collider.gameObject && lastKeyController)
                             {
+                                //前回のキーの色を青にする（＝維持する）
                                 lastKeyController.keyTextMesh.color = Color.blue;
                             }
                         }
+
+                        //ーーーーーーーーーーーーーーーーートリガー判定部分ーーーーーーーーーーーーーーーーーー
                         // あるキーに衝突している，親指トリガーオン，かつ，（前回はどのキーにも衝突していない，または，異なるキーに衝突していた）
                         if (keyController && handAnimator.isTriggeredwithThumb && !handAnimator.hasInputTriggered)
                         {
@@ -90,14 +97,6 @@ namespace MediaPipe.HandPose
                             keyController.OnTriggerEnter(handAnimator.indexTipSphere.GetComponent<Collider>());
                             handAnimator.hasInputTriggered = true; // 入力がトリガーされたことを示すフラグを設定
                             
-                        }
-                        // キーが衝突している，そのキーに指が触れているまま，かつ親指トリガーオン，かつ初めてトリガーされた
-                        else if (keyController && lastHitKey == hits[i].collider.gameObject && handAnimator.isTriggeredwithThumb && !handAnimator.hasInputTriggered)
-                        {
-                            // 前回衝突していたキーのOnTriggerEnterを呼び出す
-                            keyController.OnTriggerEnter(handAnimator.indexTipSphere.GetComponent<Collider>());
-                            // 続けて衝突しているキーのOnTriggerEnterを呼び出さないようにする
-                            handAnimator.hasInputTriggered = true; // 入力がトリガーされたことを示すフラグを設定
                         }
                         // 同じキーに止まっているが，親指トリガーオフになった場合
                         else if (keyController && !handAnimator.isTriggeredwithThumb)
@@ -131,11 +130,12 @@ namespace MediaPipe.HandPose
                 if (lastHitKey != null)
                 {
                     KeyController lastKeyController = lastHitKey.GetComponent<KeyController>();
-                    
+                    //前回のキーの色を元に戻す
+                    lastKeyController.keyTextMesh.color = Color.red;
+
                     if (lastKeyController && handAnimator.isTriggeredwithThumb)
                     {
                         Debug.Log(lastKeyController.keyTextMesh.color);
-                        lastKeyController.keyTextMesh.color = Color.red;
                         lastKeyController.OnTriggerExit(handAnimator.indexTipSphere.GetComponent<Collider>());
                         handAnimator.isTriggeredwithThumb = false;
                     }
