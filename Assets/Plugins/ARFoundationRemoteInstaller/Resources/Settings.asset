@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd607c3f010ab45a29ecfcf8d5a898ef, type: 3}
   m_Name: Settings
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   ARCompanionAppIP: 169.254.131.154
+=======
+  ARCompanionAppIP: 169.254.228.232
+>>>>>>> 3d8ed57 (gesture-keyboard)
   arCompanionSettings:
     cameraVideoSettings:
       enableVideo: 1
@@ -81,6 +85,7 @@ MonoBehaviour:
       e33: 1
     overrideProjectionMatrix: 0
     projectionMatrix:
+<<<<<<< HEAD
       e00: 3.2675974
       e01: 0
       e02: -0.022921324
@@ -88,6 +93,15 @@ MonoBehaviour:
       e10: 0
       e11: 1.5099088
       e12: -0.03787005
+=======
+      e00: 3.275588
+      e01: 0
+      e02: -0.021054268
+      e03: 0
+      e10: 0
+      e11: 1.5136012
+      e12: -0.036046028
+>>>>>>> 3d8ed57 (gesture-keyboard)
       e13: 0
       e20: 0
       e21: 0

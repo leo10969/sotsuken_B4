@@ -12,8 +12,11 @@ namespace MediaPipe.HandPose
         public GameObject backgroundPrefab;
         public GameObject specialBackgroundPrefab;
 
-        public float keySpacing = 0.1f;
-        public float rowSpacing = 0.1f;
+        public float keySpacing;
+        public float rowSpacing;
+
+        public float customSpacing1;
+        public float customSpacing2;
 
         // Update the keys list to reflect the new layout
         private List<string> keys = new List<string>
@@ -94,19 +97,19 @@ namespace MediaPipe.HandPose
 
             if (isSpecial && keyString == "Delete")
             {
-                yPos = basePosition.y - rowSpacing*1.3f - (row+0.1f) * (keySpacing) + totalHeight/1.5f;
+                yPos = basePosition.y - rowSpacing*1.3f - (row+0.1f) * (keySpacing*1.6f) + totalHeight/1.5f;
             } 
             else if (isSpecial && keyString == "Enter")
             {
-                yPos = basePosition.y - rowSpacing*1.3f - (row+0.1f) * (keySpacing) + totalHeight/1.5f;
+                yPos = basePosition.y - rowSpacing*1.3f - (row+0.1f) * (keySpacing*1.6f) + totalHeight/1.5f;
             }
             else if (isSpecial && keyString == "Space")
             {
-                yPos = basePosition.y - rowSpacing*1.3f - (row-1) * (keySpacing) + totalHeight/1.5f;
+                yPos = basePosition.y - rowSpacing*1.3f - (row-1) * (keySpacing*1.6f) + totalHeight/1.5f;
             }
             else
             {
-                yPos = basePosition.y - rowSpacing*1.3f - row * (keySpacing) + totalHeight/1.5f;
+                yPos = basePosition.y - rowSpacing*customSpacing1 - row * (keySpacing*customSpacing2) + totalHeight/1.5f;
             }
 
             Vector3 position = new Vector3(xPos, yPos, basePosition.z - 0.001f);

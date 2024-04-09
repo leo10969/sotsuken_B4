@@ -24,6 +24,7 @@ namespace MediaPipe.HandPose
         [SerializeField] ExportCsvScript csvExporter; // ExportCsvScriptへの参照
         [SerializeField] HandAnimator handAnimator;
         [SerializeField] TouchManager touchManager;
+        [SerializeField] PositionFinder positionFinder;
 
 
         private void Start()
@@ -107,21 +108,25 @@ namespace MediaPipe.HandPose
                         }
                         lastHitKey = hits[i].collider.gameObject;
                     }
-                    // else if (i == 1 && handAnimator.isTriggeredwithThumb) // 次に衝突したオブジェクト = 壁
-                    // {
-                    //     if(index == 8)
-                    //     {
-                    //         handTrackgesturePositions.Add(hits[i].point);
-                    //         // Debug.Log(smoothing_position - position);
-                    //         string[] dataForGesture = 
-                    //         {
-                    //             hits[i].point.x.ToString(),
-                    //             hits[i].point.y.ToString(),
-                    //             hits[i].point.z.ToString()
-                    //         };
-                    //         csvExporter.SaveToCSV(dataForGesture);
-                    //     }
-                    // }
+                    //ジェスチャストローク取得のための処理
+                    else if (i == 1 && handAnimator.isTriggeredwithThumb ) // 次に衝突したオブジェクト = KeyboardBase
+                    {
+                        //hits[i].pointがキーボードの範囲内にあるかどうかを調べる．
+                        Rect rect;
+                        rect = new Rect(positionFinder.QTopLeft.x, positionFinder.PRightEdge.x, positionFinder.QTopLeft.y, positionFinder.MBottomEdge.y);
+                        if(index == 8 && rect.Contains(new Vector2(hits[i].point.x, hits[i].point.y)))
+                        {
+                            handTrackgesturePositions.Add(hits[i].point);
+                            // Debug.Log(smoothing_position - position);
+                            string[] dataForGesture = 
+                            {
+                                hits[i].point.x.ToString(),
+                                hits[i].point.y.ToString(),
+                                hits[i].point.z.ToString()
+                            };
+                            csvExporter.SaveToCSV(dataForGesture);
+                        }
+                    }
                 }
             }
             //レイが衝突していない場合
@@ -211,18 +216,25 @@ namespace MediaPipe.HandPose
                         // 新しいタッチが検出された場合、OnTriggerEnterを実行
                         
                     }
-                    // // 他のオブジェクトとの衝突に関する処理はここに追加できます
-                    // else if(i == 1)
-                    // {
-                    //     touchgesturePositions.Add(hits[i].point);
-                    //     string[] dataForGesture = 
-                    //     {
-                    //         hits[i].point.x.ToString(),
-                    //         hits[i].point.y.ToString(),
-                    //         hits[i].point.z.ToString()
-                    //     };
-                    //     csvExporter.SaveToCSV(dataForGesture);
-                    // }
+                    // 他のオブジェクトとの衝突に関する処理はここに追加
+                    else if(i == 1)
+                    {
+                        //hits[i].pointがキーボードの範囲内にあるかどうかを調べる．
+                        Rect rect;
+                        rect = new Rect(positionFinder.QTopLeft.x, positionFinder.PRightEdge.x, positionFinder.QTopLeft.y, positionFinder.MBottomEdge.y);
+                        if(rect.Contains(new Vector2(hits[i].point.x, hits[i].point.y)))
+                        {
+                            touchgesturePositions.Add(hits[i].point);
+                            // Debug.Log(smoothing_position - position);
+                            string[] dataForGesture = 
+                            {
+                                hits[i].point.x.ToString(),
+                                hits[i].point.y.ToString(),
+                                hits[i].point.z.ToString()
+                            };
+                            csvExporter.SaveToCSV(dataForGesture);
+                        }
+                    }
                 }
             }
             // レイが衝突していない場合

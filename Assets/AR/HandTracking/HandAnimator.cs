@@ -24,6 +24,7 @@ namespace MediaPipe.HandPose
         public int framecount = 0;
 
         [SerializeField] RaycastingScript raycastingScript;//RaycastingScriptへの参照
+        [SerializeField] PositionFinder positionFinder;//PositionFinderへの参照
 
         [SerializeField] ResourceSet _resources = null;
         [SerializeField] bool _useAsyncReadback = true;
@@ -259,6 +260,7 @@ namespace MediaPipe.HandPose
 
                         // 人差し指の先端からのレイキャスティングを行う
                         // Debug.Log(isTriggeredwithThumb);
+                        positionFinder.QPMPositionFinder();
                         raycastingScript.CastRayFromIndexFinger(currentPosition, direction, i);
 
                     }
