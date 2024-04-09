@@ -562,7 +562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PlanePrefab: {fileID: 0}
-  m_DetectionMode: -1
+  m_DetectionMode: 2
 --- !u!114 &141263787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1535,10 +1535,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37b5a37a7714a41999a5870e5f98c579, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentMode: 1
+  currentMode: 0
   lastpath: 1
   handAnimator: {fileID: 1355274057}
-  numPhrases: 1
+  numPhrases: 5
   idDisplayText: {fileID: 1225919929}
 --- !u!4 &559890845
 Transform:
